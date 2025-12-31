@@ -108,6 +108,172 @@ h4 {
     background-clip: text;
 }
 
+/* ===== ICON NAVIGATION BAR ===== */
+.icon-nav {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+    padding: 16px 10px;
+    background: rgba(11, 15, 20, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand Logo */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    text-decoration: none;
+    padding: 8px 0;
+}
+
+.brand-v {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-accent-amber);
+    text-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
+}
+
+.brand-e {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-accent-cyan);
+    text-shadow: 0 0 10px rgba(46, 196, 182, 0.5);
+}
+
+.nav-divider {
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 4px auto;
+}
+
+.nav-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    background: transparent;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-icon svg {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-icon:hover {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-icon:hover svg {
+    transform: scale(1.1);
+}
+
+/* Active/Glowing State */
+.nav-icon.active {
+    color: var(--color-accent-amber);
+    background: rgba(255, 183, 3, 0.15);
+    box-shadow:
+        0 0 15px rgba(255, 183, 3, 0.4),
+        0 0 30px rgba(255, 183, 3, 0.2),
+        inset 0 0 10px rgba(255, 183, 3, 0.1);
+    animation: iconGlow 2s ease-in-out infinite;
+}
+
+@keyframes iconGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 15px rgba(255, 183, 3, 0.4),
+            0 0 30px rgba(255, 183, 3, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(255, 183, 3, 0.6),
+            0 0 40px rgba(255, 183, 3, 0.3);
+    }
+}
+
+/* Tooltip */
+.nav-tooltip {
+    position: absolute;
+    left: 60px;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-tooltip::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: var(--color-bg-tertiary);
+}
+
+.nav-icon:hover .nav-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Mobile: Bottom horizontal nav */
+@media (max-width: 768px) {
+    .icon-nav {
+        left: 50%;
+        top: auto;
+        bottom: 20px;
+        transform: translateX(-50%);
+        flex-direction: row;
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .nav-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-tooltip {
+        display: none;
+    }
+}
+
 /* Ensure all sections are above meteor canvas */
 section {
     position: relative;
@@ -217,6 +383,21 @@ section {
     position: relative;
     z-index: 1;
     max-width: 900px;
+}
+
+/* Hero Brand Logo */
+.hero-brand {
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero-brand-text {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
 }
 
 .hero-headline {

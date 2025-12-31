@@ -857,10 +857,66 @@ function createParticleBurst(element) {
     }
 }
 
+// ===== ICON NAVIGATION =====
+function initIconNav() {
+    const navIcons = document.querySelectorAll('.nav-icon');
+    const sections = document.querySelectorAll('section[id]');
+
+    if (!navIcons.length || !sections.length) return;
+
+    // Smooth scroll on click
+    navIcons.forEach(icon => {
+        icon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = icon.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // IntersectionObserver for active section tracking
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px', // Trigger when section is in middle-ish of viewport
+        threshold: 0
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+
+                // Remove active from all icons
+                navIcons.forEach(icon => icon.classList.remove('active'));
+
+                // Add active to matching icon
+                const activeIcon = document.querySelector(`.nav-icon[data-section="${sectionId}"]`);
+                if (activeIcon) {
+                    activeIcon.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+}
+
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize global controller first
     AnimationController.init();
+
+    // Initialize navigation
+    initIconNav();
 
     // Initialize animations
     initHeroParticles();      // Polygon shower for hero section
