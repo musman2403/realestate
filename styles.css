@@ -247,6 +247,14 @@ h4 {
     transform: translateX(0);
 }
 
+/* Mobile: Ensure value cards are visible */
+@media (max-width: 768px) {
+    .value-card {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
 /* Mobile: Bottom horizontal nav */
 @media (max-width: 768px) {
     .icon-nav {
@@ -613,13 +621,20 @@ section {
 /* ===== SERVICES SECTION ===== */
 .services {
     background: var(--color-bg-primary);
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+.services .section-headline {
+    margin-top: 0;
+    margin-bottom: 150px;
 }
 
 .services-orbit-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    height: 600px;
+    max-width: 550px;
+    height: 450px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -699,29 +714,7 @@ section {
     cursor: pointer;
 }
 
-.orbit-item[data-orbit="1"] {
-    top: 0;
-    left: 50%;
-    /* transform handled by animation */
-}
-
-.orbit-item[data-orbit="2"] {
-    top: 50%;
-    right: 0;
-    /* transform handled by animation */
-}
-
-.orbit-item[data-orbit="3"] {
-    bottom: 0;
-    left: 50%;
-    /* transform handled by animation */
-}
-
-.orbit-item[data-orbit="4"] {
-    top: 50%;
-    left: 0;
-    /* transform handled by animation */
-}
+/* Orbit item positioning now handled in counter-rotation section below */
 
 .orbit-item:hover {
     background: rgba(46, 196, 182, 0.1);
@@ -1492,36 +1485,46 @@ section {
 }
 
 /* ===== ORBIT COUNTER-ROTATION ===== */
-@keyframes orbitCounterSpinX {
+/* Counter-rotate ALL orbit items to keep them upright while parent ring rotates */
+@keyframes orbitCounterSpin {
     from {
-        transform: translateX(-50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 
     to {
-        transform: translateX(-50%) rotate(-360deg);
+        transform: translate(-50%, -50%) rotate(-360deg);
     }
 }
 
-@keyframes orbitCounterSpinY {
-    from {
-        transform: translateY(-50%) rotate(0deg);
-    }
-
-    to {
-        transform: translateY(-50%) rotate(-360deg);
-    }
+/* Apply counter-rotation to all orbit items */
+.orbit-item {
+    /* Override positioning to use translate for centering */
+    transform: translate(-50%, -50%);
+    animation: orbitCounterSpin 60s linear infinite;
 }
 
-.orbit-item[data-orbit="1"],
+/* Position items around the ring using left/top percentages */
+.orbit-item[data-orbit="1"] {
+    top: 0;
+    left: 50%;
+}
+
+.orbit-item[data-orbit="2"] {
+    top: 50%;
+    left: 100%;
+}
+
 .orbit-item[data-orbit="3"] {
-    animation: orbitCounterSpinX 60s linear infinite;
+    top: 100%;
+    left: 50%;
 }
 
-.orbit-item[data-orbit="2"],
 .orbit-item[data-orbit="4"] {
-    animation: orbitCounterSpinY 60s linear infinite;
+    top: 50%;
+    left: 0;
 }
 
+/* Pause counter-rotation when ring is hovered */
 .orbit-ring:hover .orbit-item {
     animation-play-state: paused;
 }
