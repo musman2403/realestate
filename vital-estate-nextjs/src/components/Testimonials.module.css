@@ -126,21 +126,44 @@
 }
 
 @media (max-width: 768px) {
+    .testimonials {
+        padding: var(--space-lg) 0;
+    }
+
     .carouselWrapper {
-        gap: var(--space-sm);
+        gap: var(--space-xs);
+        padding: 0 var(--space-sm);
+        position: relative;
+        z-index: 10;
     }
 
     .navBtn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
     }
 
     .testimonialCard {
-        padding: var(--space-lg);
+        padding: var(--space-md);
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .info h4 {
+        font-size: 1rem;
     }
 
     .quote {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .dots {
+        position: relative;
+        z-index: 10;
     }
 }

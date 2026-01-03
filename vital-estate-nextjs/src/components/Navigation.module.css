@@ -132,7 +132,8 @@
         bottom: 14px;
         transform: translateX(-50%) translateY(80px);
         flex-direction: row;
-        padding: 8px 12px;
+        padding: 6px 10px;
+        border-radius: 30px;
     }
 
     .iconNav.visible {
@@ -146,17 +147,17 @@
 
     .navItems {
         flex-direction: row;
-        gap: 1px;
+        gap: 0;
     }
 
     .navIcon {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
     }
 
     .navIcon svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
     }
 
     .tooltip {

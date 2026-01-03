@@ -136,21 +136,67 @@
 @media (max-width: 992px) {
     .grid {
         grid-template-columns: 1fr 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-md);
     }
 
     .brandCol {
         grid-column: span 2;
         max-width: none;
+        text-align: center;
+    }
+
+    .social {
+        justify-content: center;
     }
 }
 
 @media (max-width: 576px) {
+    .footer {
+        padding: var(--space-lg) 0 6rem;
+    }
+
     .grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
     }
 
     .brandCol {
-        grid-column: span 1;
+        grid-column: span 2;
+    }
+
+    .brand {
+        font-size: 1.2rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        margin-bottom: var(--space-sm);
+    }
+
+    .linksCol h4,
+    .contactCol h4,
+    .legalCol h4 {
+        font-size: 0.9rem;
+        margin-bottom: var(--space-sm);
+    }
+
+    .linksCol a,
+    .legalCol a,
+    .contactCol li {
+        font-size: 0.8rem;
+    }
+
+    .linksCol li,
+    .legalCol li {
+        margin-bottom: 0.5rem;
+    }
+
+    .contactCol li {
+        margin-bottom: 0.5rem;
+    }
+
+    .bottom p {
+        font-size: 0.75rem;
     }
 }
