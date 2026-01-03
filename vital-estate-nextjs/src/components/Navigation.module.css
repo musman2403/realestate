@@ -129,11 +129,11 @@
     .iconNav {
         left: 50%;
         top: auto;
-        bottom: 14px;
+        bottom: 12px;
         transform: translateX(-50%) translateY(80px);
         flex-direction: row;
-        padding: 6px 10px;
-        border-radius: 30px;
+        padding: 4px 4px;
+        border-radius: 22px;
     }
 
     .iconNav.visible {
@@ -151,13 +151,14 @@
     }
 
     .navIcon {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
+        padding: 4px;
     }
 
     .navIcon svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
 
     .tooltip {
