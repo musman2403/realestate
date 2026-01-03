@@ -617,44 +617,54 @@ function initTrustWave() {
     const waveContainer = document.getElementById('testimonialsWave');
     if (!waveContainer) return;
 
-    // Sample testimonials (Pakistani names, specific outcomes with context)
+    // Real client testimonials from Google Reviews
     const testimonials = [
         {
-            name: "Ahmed Raza",
-            role: "Property Investor",
-            quote: "Closed my Engineers Town plot transfer in 6 days. No hidden charges, no delays. Vital Estates handled everything professionally.",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-            context: { location: "Engineers Town", property: "10 Marla Plot", timeline: "6 days" }
+            name: "Awais Sajid",
+            role: "Happy Client",
+            quote: "Best place to get rented your property and sale your property or wanna purchase. Staff is good, owners are also good. I like the way they deal.",
+            image: "https://ui-avatars.com/api/?name=Awais+Sajid&background=C0C0C0&color=0B0F14&size=150",
+            stars: 5
         },
         {
-            name: "Fatima Malik",
-            role: "First-time Buyer",
-            quote: "Bought my first home in DHA Phase 5. The team guided me through every document. Completely transparent process.",
-            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-            context: { location: "DHA Phase 5", property: "10 Marla House", timeline: "14 days" }
+            name: "Nadeem Ahmad",
+            role: "Satisfied Customer",
+            quote: "Perfect place for property sales and purchase. Highly recommended for anyone looking to buy or sell property in Lahore.",
+            image: "https://ui-avatars.com/api/?name=Nadeem+Ahmad&background=C0C0C0&color=0B0F14&size=150",
+            stars: 5
         },
         {
-            name: "Bilal Hassan",
-            role: "Commercial Investor",
-            quote: "Sold my Gulberg commercial property at 15% above market rate. Their ROI analysis was spot-on. Highly recommend.",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-            context: { location: "Gulberg III", property: "Commercial Shop", timeline: "21 days" }
+            name: "Ahmar Gondal",
+            role: "Property Buyer",
+            quote: "They are nice in their dealings. Professional and straightforward approach to real estate transactions.",
+            image: "https://ui-avatars.com/api/?name=Ahmar+Gondal&background=C0C0C0&color=0B0F14&size=150",
+            stars: 5
         },
         {
-            name: "Ayesha Khan",
-            role: "Overseas Pakistani",
-            quote: "Managing property from abroad seemed impossible until I found Vital Estates. They handled my Bahria Town investment end-to-end.",
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-            context: { location: "Bahria Town", property: "5 Marla Plot", timeline: "Remote" }
+            name: "Fazalurrehman",
+            role: "Business Client",
+            quote: "Professional and cooperative attitude. Strongly recommended for guidance about real estate business.",
+            image: "https://ui-avatars.com/api/?name=Fazalurrehman&background=C0C0C0&color=0B0F14&size=150",
+            stars: 5
         },
         {
-            name: "Usman Tariq",
-            role: "Plot Developer",
-            quote: "Purchased 5 plots through Vital Estates over 2 years. Their market insights helped me maximize returns every time.",
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-            context: { location: "Multiple Areas", property: "5 Plots", timeline: "2 years" }
+            name: "Mooed Waraich",
+            role: "Property Dealer",
+            quote: "Nice people for property dealing. Good experience working with the Vital Estates team.",
+            image: "https://ui-avatars.com/api/?name=Mooed+Waraich&background=C0C0C0&color=0B0F14&size=150",
+            stars: 4
         }
     ];
+
+    // Generate star rating HTML
+    function getStarRating(stars) {
+        let html = '<div class="testimonial-stars">';
+        for (let i = 1; i <= 5; i++) {
+            html += i <= stars ? '⭐' : '☆';
+        }
+        html += '</div>';
+        return html;
+    }
 
     // Render testimonials
     testimonials.forEach((testimonial, index) => {
@@ -672,12 +682,8 @@ function initTrustWave() {
                     <span>${testimonial.role}</span>
                 </div>
             </div>
+            ${getStarRating(testimonial.stars)}
             <p class="testimonial-quote">${testimonial.quote}</p>
-            <div class="testimonial-context">
-                <span>📍 ${testimonial.context.location}</span>
-                <span>🏠 ${testimonial.context.property}</span>
-                <span>⏱ ${testimonial.context.timeline}</span>
-            </div>
         `;
 
         waveContainer.appendChild(card);

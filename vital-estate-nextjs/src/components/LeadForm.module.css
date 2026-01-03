@@ -1,0 +1,77 @@
+.leadCapture {
+    background: #0B0F14;
+    padding: var(--space-xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.formGroup {
+    margin-bottom: var(--space-md);
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition-base);
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-silver);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.formGroup select {
+    cursor: pointer;
+}
+
+.formGroup select option {
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.form .btn {
+    width: 100%;
+}
+
+.success {
+    margin-top: var(--space-md);
+    text-align: center;
+    color: #4ade80;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}

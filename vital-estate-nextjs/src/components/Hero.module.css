@@ -1,0 +1,174 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem var(--space-xl);
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+    background: #0B0F14;
+}
+
+.content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.brand {
+    margin-bottom: var(--space-sm);
+}
+
+.brandText {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.tagline {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-sm);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.headline {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    margin-bottom: var(--space-md);
+    line-height: 1.05;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.subheadline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-lg);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.cta {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+.proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+.proofIcon {
+    color: var(--color-accent-silver);
+    font-weight: bold;
+}
+
+.scrollIndicator {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.scrollLine {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--color-accent-silver), transparent);
+    animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scaleY(0.5);
+        opacity: 0.5;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: var(--space-lg) var(--space-md);
+        padding-top: 60px;
+    }
+
+    .cta {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta :global(.btn) {
+        width: 100%;
+    }
+}

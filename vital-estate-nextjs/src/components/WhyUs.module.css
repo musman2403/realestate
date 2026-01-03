@@ -1,0 +1,132 @@
+.whyUs {
+    background: #0F141A;
+    padding: var(--space-xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.gridContainer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.gridSvg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.gridLines path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: drawLine 2s ease forwards;
+}
+
+.gridLines path:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.gridLines path:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.gridLines path:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.gridLines path:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.gridLines path:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.gridLines path:nth-child(6) {
+    animation-delay: 0.15s;
+}
+
+.gridLines path:nth-child(7) {
+    animation-delay: 0.25s;
+}
+
+.gridLines path:nth-child(8) {
+    animation-delay: 0.35s;
+}
+
+.gridLines path:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+.gridLines path:nth-child(10) {
+    animation-delay: 0.55s;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.valueGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.valueCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: var(--transition-base);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.valueCard.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.valueCard:hover {
+    background: rgba(192, 192, 192, 0.05);
+    border-color: rgba(192, 192, 192, 0.2);
+    transform: translateY(-5px);
+}
+
+.valueIcon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-silver);
+    border-radius: var(--border-radius-md);
+    font-size: 1.5rem;
+}
+
+.valueCard h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-primary);
+}
+
+.valueCard p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.cta {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}

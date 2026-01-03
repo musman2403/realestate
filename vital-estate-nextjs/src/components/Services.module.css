@@ -1,0 +1,204 @@
+.services {
+    background: #0B0F14;
+    padding: var(--space-xl) 0;
+    padding-top: 3rem;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.services :global(.section-headline) {
+    margin-bottom: 2rem;
+}
+
+.orbitContainer {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    height: 550px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbitCore {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.coreInner {
+    width: 120px;
+    height: 120px;
+    background: var(--gradient-silver);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-bg-primary);
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: var(--shadow-glow-silver);
+}
+
+.corePulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-accent-silver);
+    border-radius: 50%;
+    animation: corePulse 3s ease infinite;
+}
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+.orbitRing {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    animation: orbitRotate 30s linear infinite;
+}
+
+.orbitRing.paused {
+    animation-play-state: paused;
+}
+
+@keyframes orbitRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.orbitCard {
+    position: absolute;
+    width: 140px;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    margin-left: -70px;
+    margin-top: -60px;
+    transform: rotate(calc(var(--angle))) translateY(-210px) rotate(calc(-1 * var(--angle)));
+    animation: counterRotate 30s linear infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.orbitCard.visible {
+    opacity: 1;
+}
+
+.orbitRing.paused .orbitCard {
+    animation-play-state: paused;
+}
+
+.orbitCard:hover {
+    background: rgba(192, 192, 192, 0.1);
+    border-color: rgba(192, 192, 192, 0.3);
+    z-index: 20;
+}
+
+@keyframes counterRotate {
+    from {
+        transform: rotate(calc(var(--angle))) translateY(-210px) rotate(calc(-1 * var(--angle) - 0deg));
+    }
+
+    to {
+        transform: rotate(calc(var(--angle))) translateY(-210px) rotate(calc(-1 * var(--angle) - 360deg));
+    }
+}
+
+.cardIcon {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto var(--space-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-silver);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+}
+
+.orbitCard h3 {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: var(--color-text-primary);
+}
+
+.orbitCard p {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+/* Mobile - Grid layout instead of orbit */
+@media (max-width: 768px) {
+    .services {
+        min-height: auto;
+        padding: var(--space-lg) 0;
+    }
+
+    .orbitContainer {
+        height: auto;
+        max-width: none;
+    }
+
+    .orbitCore {
+        display: none;
+    }
+
+    .orbitRing {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+        animation: none;
+        padding: 0 var(--space-md);
+    }
+
+    .orbitCard {
+        position: static;
+        transform: none !important;
+        animation: none;
+        width: auto;
+        opacity: 1;
+        margin: 0;
+    }
+}

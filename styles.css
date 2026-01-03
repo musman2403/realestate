@@ -1101,6 +1101,12 @@ section {
     color: var(--color-text-muted);
 }
 
+.testimonial-stars {
+    margin: var(--space-sm) 0;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
 .testimonial-quote {
     font-size: 1rem;
     line-height: 1.7;

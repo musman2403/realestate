@@ -1,0 +1,206 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Color Palette - Silver/Gray Theme */
+  --color-bg-primary: #0B0F14;
+  --color-bg-secondary: #111827;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+
+  /* Silver Accent Colors */
+  --color-accent-silver: #C0C0C0;
+  --color-accent-silver-light: #E8E8E8;
+  --color-accent-silver-dark: #9CA3AF;
+  --color-accent-cyan: #2EC4B6;
+
+  /* Gradients - Silver Theme */
+  --gradient-signature: linear-gradient(120deg, #E8E8E8, #C0C0C0, #9CA3AF);
+  --gradient-silver: linear-gradient(135deg, #E8E8E8, #9CA3AF);
+
+  /* Typography */
+  --font-headline: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Border Radius */
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 50px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Shadows */
+  --shadow-glow-silver: 0 0 30px rgba(192, 192, 192, 0.3);
+  --shadow-glow-cyan: 0 0 30px rgba(46, 196, 182, 0.3);
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text {
+  background: var(--gradient-signature);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+section {
+  padding: var(--space-xl) 0;
+  position: relative;
+}
+
+.section-headline {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 1rem 2rem;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-base);
+}
+
+.btn-primary {
+  background: var(--gradient-silver);
+  color: var(--color-bg-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-silver);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent-cyan);
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent-cyan);
+  color: var(--color-bg-primary);
+  transform: translateY(-2px);
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+  transition: var(--transition-base);
+}
+
+.card:hover {
+  background: rgba(192, 192, 192, 0.05);
+  border-color: rgba(192, 192, 192, 0.2);
+  transform: translateY(-5px);
+}
+
+/* ===== PARTICLES CONTAINER ===== */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
