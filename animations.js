@@ -77,7 +77,7 @@ async function initHeroParticles() {
                 }
             },
             color: {
-                value: ["#FFB703", "#E63946", "#2EC4B6"]
+                value: ["#E8E8E8", "#C0C0C0", "#9CA3AF"]
             },
             shape: {
                 type: "polygon",
@@ -135,7 +135,7 @@ async function initHeroParticles() {
             shadow: {
                 enable: true,
                 blur: 15,
-                color: "#FFB703"
+                color: "#C0C0C0"
             }
         },
         interactivity: {
@@ -210,8 +210,8 @@ function initFallingMeteors() {
             // Size of glowing head (smaller for subtlety)
             this.headSize = 1.5 + Math.random() * 2;
 
-            // Color - amber/red/cyan
-            const colors = ['#FFB703', '#E63946', '#2EC4B6'];
+            // Color - silver/gray
+            const colors = ['#E8E8E8', '#C0C0C0', '#9CA3AF'];
             this.color = colors[Math.floor(Math.random() * colors.length)];
 
             // Opacity (low for subtlety)
@@ -344,8 +344,32 @@ function initOrbitingServices() {
         return;
     }
 
-    // Desktop orbit animation is handled via CSS in styles.css
-    // including pause-on-hover and counter-rotation for readability
+    // Desktop orbit - add JS-based hover pause for reliability
+    const orbitContainer = document.querySelector('.services-orbit-container');
+    if (!orbitContainer) return;
+
+    const orbitRing = orbitContainer.querySelector('.orbit-ring');
+    const orbitItems = orbitContainer.querySelectorAll('.orbit-item');
+
+    // Pause all animations when hovering on container
+    orbitContainer.addEventListener('mouseenter', () => {
+        if (orbitRing) {
+            orbitRing.style.animationPlayState = 'paused';
+        }
+        orbitItems.forEach(item => {
+            item.style.animationPlayState = 'paused';
+        });
+    });
+
+    // Resume animations when mouse leaves container
+    orbitContainer.addEventListener('mouseleave', () => {
+        if (orbitRing) {
+            orbitRing.style.animationPlayState = 'running';
+        }
+        orbitItems.forEach(item => {
+            item.style.animationPlayState = 'running';
+        });
+    });
 }
 
 // Mobile carousel with touch inertia
