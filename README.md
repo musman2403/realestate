@@ -1,65 +1,36 @@
-# Vital Estates - Premium Real Estate Platform
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A high-performance, conversion-focused real estate landing page featuring advanced animations and a premium dark aesthetic.
+## Getting Started
 
-## 🚀 Key Features
+First, run the development server:
 
-### 🎨 Visual & Interactive
-- **Dual Particle System**:
-  - **Hero Section**: Polygon mesh shower using `tsParticles`.
-  - **Global**: Custom Canvas-based falling meteor shower with glowing heads and gradients (Z-Ordered for readability).
-- **Orbiting Services**:
-  - **Desktop**: Interactive 3D orbiting animation that pauses on hover.
-  - **Mobile**: Responsive vertical grid layout for maximum readability.
-- **Scroll Animations**:
-  - Magnetic buttons and hover effects.
-  - Scroll-triggered reveal animations.
-  - Interactive testimonials with touch-swipe support.
-
-### 📱 Mobile functionality
-- Fully responsive design.
-- Touch-optimized carousels and navigation.
-- Performance-tuned animations (reduced particle count on mobile).
-
-## 🛠️ Tech Stack
-- **Core**: Semantic HTML5, CSS3 (Variables + Flexbox/Grid), Vanilla JavaScript (ES6+).
-- **Libraries**: 
-  - [`tsParticles`](https://particles.js.org/) (Hero background).
-- **Architecture**:
-  - CSS-first animations for performance.
-  - Modular JS architecture (`AnimationController`).
-
-## 🏃‍♂️ Getting Started
-
-### Prerequisites
-No node modules or build steps required. This is a static site.
-
-### Running Locally
-You can serve the files using any static file server.
-
-**Using Python:**
 ```bash
-python -m http.server 3000
-```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
-
-**Using VS Code:**
-- Install "Live Server" extension.
-- Right-click `index.html` -> "Open with Live Server".
-
-## 📂 Project Structure
-```
-Vital Estate/
-├── index.html          # Main entry point
-├── styles.css          # Global styles & design system
-├── animations.js       # Animation logic (Orbit, Meteors, Interactivity)
-└── assets/
-    ├── particles/      # Particle configurations
-    └── svg/            # Vector assets
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## ✨ Design Philosophy
-"Documentation-First Real Estate" — The design reflects trust, premium quality, and verification.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
-© 2025 Vital Estates & Builders.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
