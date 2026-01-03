@@ -4,14 +4,14 @@
   --color-bg-primary: #0B0F14;
   --color-bg-secondary: #111827;
   --color-text-primary: #F8FAFC;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #64748B;
+  --color-text-secondary: #B8C4D4;
+  --color-text-muted: #8B99AB;
 
   /* Silver Accent Colors */
-  --color-accent-silver: #C0C0C0;
-  --color-accent-silver-light: #E8E8E8;
-  --color-accent-silver-dark: #9CA3AF;
-  --color-accent-cyan: #2EC4B6;
+  --color-accent-silver: #D0D0D0;
+  --color-accent-silver-light: #F0F0F0;
+  --color-accent-silver-dark: #A0A8B4;
+  --color-accent-cyan: #38D9C8;
 
   /* Gradients - Silver Theme */
   --gradient-signature: linear-gradient(120deg, #E8E8E8, #C0C0C0, #9CA3AF);

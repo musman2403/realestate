@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ParticlesBackgroundProps {
     id: string;
@@ -23,12 +23,43 @@ export default function ParticlesBackground({ id, intensity = "medium" }: Partic
     const animationRef = useRef<number | null>(null);
     const particlesRef = useRef<Particle[]>([]);
     const mouseRef = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+    const [isVisible, setIsVisible] = useState(false);
 
-    const particleCount = intensity === "low" ? 60 : intensity === "medium" ? 90 : 120;
-    const linkDistance = 100;
-    const mouseRadius = 150;
+    // Reduce particle count on mobile for better performance
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const baseCount = intensity === "low" ? 40 : intensity === "medium" ? 60 : 80;
+    const particleCount = isMobile ? Math.floor(baseCount * 0.5) : baseCount;
+    const linkDistance = isMobile ? 80 : 100;
+    const mouseRadius = 120;
 
     useEffect(() => {
+        // Use Intersection Observer to only run animation when visible
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    setIsVisible(entry.isIntersecting);
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(canvas);
+
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) {
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+                animationRef.current = null;
+            }
+            return;
+        }
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -66,23 +97,36 @@ export default function ParticlesBackground({ id, intensity = "medium" }: Partic
         }
 
         // Initialize particles with random velocities
-        particlesRef.current = [];
-        for (let i = 0; i < particleCount; i++) {
-            const vx = (Math.random() - 0.5) * 1.5;
-            const vy = (Math.random() - 0.5) * 1.5;
-            particlesRef.current.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: vx,
-                vy: vy,
-                baseVx: vx,
-                baseVy: vy,
-                size: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.4 + 0.3,
-            });
+        if (particlesRef.current.length === 0) {
+            for (let i = 0; i < particleCount; i++) {
+                const vx = (Math.random() - 0.5) * 1.2;
+                const vy = (Math.random() - 0.5) * 1.2;
+                particlesRef.current.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: vx,
+                    vy: vy,
+                    baseVx: vx,
+                    baseVy: vy,
+                    size: Math.random() * 2 + 1,
+                    opacity: Math.random() * 0.4 + 0.3,
+                });
+            }
         }
 
-        const animate = () => {
+        let lastTime = 0;
+        const targetFPS = 30; // Limit FPS for performance
+        const frameInterval = 1000 / targetFPS;
+
+        const animate = (currentTime: number) => {
+            if (!isVisible) return;
+
+            animationRef.current = requestAnimationFrame(animate);
+
+            const deltaTime = currentTime - lastTime;
+            if (deltaTime < frameInterval) return;
+            lastTime = currentTime - (deltaTime % frameInterval);
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const particles = particlesRef.current;
@@ -92,81 +136,74 @@ export default function ParticlesBackground({ id, intensity = "medium" }: Partic
                 const p = particles[i];
 
                 if (mouse.active) {
-                    // Mouse attraction when cursor is active
                     const dx = mouse.x - p.x;
                     const dy = mouse.y - p.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < mouseRadius && distance > 0) {
                         const force = (mouseRadius - distance) / mouseRadius;
-                        p.vx += (dx / distance) * force * 0.03;
-                        p.vy += (dy / distance) * force * 0.03;
+                        p.vx += (dx / distance) * force * 0.02;
+                        p.vy += (dy / distance) * force * 0.02;
                     }
-                    // Friction when mouse is active
                     p.vx *= 0.98;
                     p.vy *= 0.98;
                 } else {
-                    // Return to base random movement when cursor is away
                     p.vx += (p.baseVx - p.vx) * 0.01;
                     p.vy += (p.baseVy - p.vy) * 0.01;
                 }
 
-                // Update position
                 p.x += p.vx;
                 p.y += p.vy;
 
-                // Bounce off edges
                 if (p.x < 0) { p.x = 0; p.vx *= -1; p.baseVx *= -1; }
                 if (p.x > canvas.width) { p.x = canvas.width; p.vx *= -1; p.baseVx *= -1; }
                 if (p.y < 0) { p.y = 0; p.vy *= -1; p.baseVy *= -1; }
                 if (p.y > canvas.height) { p.y = canvas.height; p.vy *= -1; p.baseVy *= -1; }
 
-                // Draw particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(200, 200, 200, ${p.opacity})`;
+                ctx.fillStyle = `rgba(208, 208, 208, ${p.opacity})`;
                 ctx.fill();
 
-                // Draw lines to nearby particles
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                // Only draw lines on desktop for performance
+                if (!isMobile) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < linkDistance) {
-                        const opacity = (1 - distance / linkDistance) * 0.3;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(192, 192, 192, ${opacity})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
+                        if (distance < linkDistance) {
+                            const opacity = (1 - distance / linkDistance) * 0.25;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(192, 192, 192, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
                     }
-                }
 
-                // Draw lines to mouse when active
-                if (mouse.active) {
-                    const dx = mouse.x - p.x;
-                    const dy = mouse.y - p.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (mouse.active) {
+                        const dx = mouse.x - p.x;
+                        const dy = mouse.y - p.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < mouseRadius) {
-                        const opacity = (1 - distance / mouseRadius) * 0.4;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = `rgba(220, 220, 220, ${opacity})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.stroke();
+                        if (distance < mouseRadius) {
+                            const opacity = (1 - distance / mouseRadius) * 0.35;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(220, 220, 220, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
                     }
                 }
             }
-
-            animationRef.current = requestAnimationFrame(animate);
         };
 
-        animate();
+        animationRef.current = requestAnimationFrame(animate);
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
@@ -178,7 +215,7 @@ export default function ParticlesBackground({ id, intensity = "medium" }: Partic
                 cancelAnimationFrame(animationRef.current);
             }
         };
-    }, [particleCount]);
+    }, [isVisible, particleCount, isMobile]);
 
     return (
         <canvas
