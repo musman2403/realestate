@@ -56,86 +56,62 @@ const AnimationController = {
     }
 };
 
-// ===== 1. HERO PARTICLE SHOWER (polygon style) =====
-async function initHeroParticles() {
-    if (AnimationController.reducedMotion) return;
-
+// ===== 1. SIMPLE SILVER PARTICLES (for multiple sections) =====
+// Simple floating silver circles configuration
+function getSimpleParticlesConfig() {
     const isMobile = window.innerWidth <= 768;
 
-    const config = {
+    return {
         fullScreen: false,
         background: {
             color: { value: "transparent" }
         },
-        fpsLimit: isMobile ? 45 : 60,
+        fpsLimit: isMobile ? 30 : 60,
         particles: {
             number: {
-                value: isMobile ? 15 : 30,
+                value: isMobile ? 25 : 50,
                 density: {
                     enable: true,
-                    area: 1000
+                    area: 800
                 }
             },
             color: {
                 value: ["#E8E8E8", "#C0C0C0", "#9CA3AF"]
             },
             shape: {
-                type: "polygon",
-                polygon: {
-                    sides: 5
-                }
+                type: "circle"
             },
             opacity: {
-                value: { min: 0.3, max: 0.7 },
+                value: { min: 0.3, max: 0.6 },
                 animation: {
                     enable: true,
-                    speed: 0.3,
+                    speed: 0.5,
                     minimumValue: 0.1,
                     sync: false
                 }
             },
             size: {
-                value: { min: 2, max: isMobile ? 4 : 6 },
+                value: { min: 1, max: 3 },
                 animation: {
-                    enable: true,
-                    speed: 2,
-                    minimumValue: 1,
-                    sync: false
+                    enable: false
                 }
+            },
+            links: {
+                enable: true,
+                color: "#C0C0C0",
+                distance: 150,
+                opacity: 0.2,
+                width: 1
             },
             move: {
                 enable: true,
-                speed: { min: 0.3, max: 0.8 },
-                direction: "bottom-right",
-                random: false,
+                speed: 0.5,
+                direction: "none",
+                random: true,
                 straight: false,
                 outModes: {
                     default: "out"
-                },
-                trail: {
-                    enable: true,
-                    length: 10,
-                    fillColor: "#0B0F14"
                 }
-            },
-            wobble: {
-                enable: true,
-                distance: 5,
-                speed: 2
-            },
-            tilt: {
-                enable: true,
-                direction: "random",
-                value: { min: 0, max: 360 },
-                animation: {
-                    enable: true,
-                    speed: 5
-                }
-            },
-            shadow: {
-                enable: true,
-                blur: 15,
-                color: "#C0C0C0"
             }
         },
         interactivity: {
@@ -143,29 +119,48 @@ async function initHeroParticles() {
             events: {
                 onHover: {
                     enable: !isMobile,
-                    mode: "repulse",
-                    parallax: {
-                        enable: true,
-                        force: 20,
-                        smooth: 50
-                    }
+                    mode: "grab"
                 }
             },
             modes: {
-                repulse: {
-                    distance: 100,
-                    duration: 0.4,
-                    speed: 0.5
+                grab: {
+                    distance: 140,
+                    links: {
+                        opacity: 0.4
+                    }
                 }
             }
         },
         detectRetina: !isMobile
     };
+}
+
+// Initialize particles for hero section
+async function initHeroParticles() {
+    if (AnimationController.reducedMotion) return;
 
     try {
-        AnimationController.particlesInstance = await tsParticles.load("hero-particles", config);
+        AnimationController.particlesInstance = await tsParticles.load("hero-particles", getSimpleParticlesConfig());
     } catch (error) {
         console.warn('Hero particles failed to load:', error);
+    }
+}
+
+// Initialize particles for all other sections
+async function initSectionParticles() {
+    if (AnimationController.reducedMotion) return;
+
+    const sections = ['services-particles', 'testimonials-particles', 'lead-particles'];
+
+    for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            try {
+                await tsParticles.load(sectionId, getSimpleParticlesConfig());
+            } catch (error) {
+                console.warn(`Particles for ${sectionId} failed to load:`, error);
+            }
+        }
     }
 }
 
@@ -942,9 +937,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize navigation
     initIconNav();
 
-    // Initialize animations
-    initHeroParticles();      // Polygon shower for hero section
-    initFallingMeteors();     // Canvas meteors for whole page (except footer)
+    // Initialize simple silver particles for all sections
+    initHeroParticles();       // Simple particles for hero section
+    initSectionParticles();    // Simple particles for why-us, testimonials, contact
+
+    // Initialize other animations
     initMarketGrid();
     initOrbitingServices();
     initDepthStack();
