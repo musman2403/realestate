@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: "/",
             disallow: ["/api/", "/private/"],
         },
-        sitemap: "https://vitalestates.pk/sitemap.xml",
+        sitemap: "https://realestates.pk/sitemap.xml",
     };
 }

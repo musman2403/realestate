@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 // SEO Metadata Configuration
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vitalestates.pk"),
+  metadataBase: new URL("https://realestates.pk"),
   title: {
     default: "Real Estates & Builders | Premium Real Estate in Lahore",
     template: "%s | Real Estates",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_PK",
-    url: "https://vitalestates.pk",
+    url: "https://realestates.pk",
     siteName: "Real Estates & Builders",
     title: "Real Estates & Builders | Premium Real Estate in Lahore",
     description:
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://vitalestates.pk",
+    canonical: "https://realestates.pk",
   },
 };
 
@@ -93,7 +93,7 @@ const jsonLd = {
   name: "Real Estates & Builders",
   description:
     "Premium real estate services in Lahore. Buy, sell, or rent properties with trusted advisors.",
-  url: "https://vitalestates.pk",
+  url: "https://realestates.pk",
   telephone: "+92-XXX-XXXXXXX",
   address: {
     "@type": "PostalAddress",
