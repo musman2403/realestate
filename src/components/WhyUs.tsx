@@ -84,7 +84,7 @@ export default function WhyUs() {
             </div>
             <div className="container">
                 <h2 className="section-headline">
-                    Why Choose <span className="gradient-text">Vital Estate?</span>
+                    Why Choose <span className="gradient-text">Real Estate?</span>
                 </h2>
                 <div className={styles.valueGrid}>
                     {values.map((value, index) => (

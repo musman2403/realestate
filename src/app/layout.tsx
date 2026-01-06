@@ -24,8 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vitalestates.pk"),
   title: {
-    default: "Vital Estates & Builders | Premium Real Estate in Lahore",
-    template: "%s | Vital Estates",
+    default: "Real Estates & Builders | Premium Real Estate in Lahore",
+    template: "%s | Real Estates",
   },
   description:
     "Sell faster. Buy smarter. Own real value in Lahore with trusted property advisors. Documentation-first approach for transparent real estate transactions.",
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     "buy property lahore",
     "sell property lahore",
     "rent property lahore",
-    "vital estates",
+    "real estates",
     "property advisors pakistan",
     "dha lahore property",
     "bahria town lahore",
   ],
-  authors: [{ name: "Vital Estates & Builders" }],
-  creator: "Vital Estates",
-  publisher: "Vital Estates & Builders",
+  authors: [{ name: "Real Estates & Builders" }],
+  creator: "Real Estates",
+  publisher: "Real Estates & Builders",
   robots: {
     index: true,
     follow: true,
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PK",
     url: "https://vitalestates.pk",
-    siteName: "Vital Estates & Builders",
-    title: "Vital Estates & Builders | Premium Real Estate in Lahore",
+    siteName: "Real Estates & Builders",
+    title: "Real Estates & Builders | Premium Real Estate in Lahore",
     description:
       "Sell faster. Buy smarter. Own real value in Lahore with trusted property advisors.",
     images: [
@@ -67,13 +67,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Vital Estates - Premium Real Estate in Lahore",
+        alt: "Real Estates - Premium Real Estate in Lahore",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vital Estates & Builders | Premium Real Estate in Lahore",
+    title: "Real Estates & Builders | Premium Real Estate in Lahore",
     description:
       "Sell faster. Buy smarter. Own real value in Lahore with trusted property advisors.",
     images: ["/og-image.jpg"],
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
-  name: "Vital Estates & Builders",
+  name: "Real Estates & Builders",
   description:
     "Premium real estate services in Lahore. Buy, sell, or rent properties with trusted advisors.",
   url: "https://vitalestates.pk",

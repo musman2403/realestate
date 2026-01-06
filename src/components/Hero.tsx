@@ -17,7 +17,7 @@ export default function Hero() {
             <div className={`${styles.content} ${isVisible ? styles.visible : ""}`}>
                 <div className={styles.brand}>
                     <span className={styles.brandText}>
-                        Vital <span className="gradient-text">Estate</span>
+                        Real <span className="gradient-text">Estate</span>
                     </span>
                 </div>
                 <p className={styles.tagline}>Documentation-First Real Estate</p>

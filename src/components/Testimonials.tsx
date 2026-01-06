@@ -37,7 +37,7 @@ const testimonials = [
         name: "Mooed Waraich",
         role: "Property Dealer",
         quote:
-            "Nice people for property dealing. Good experience working with the Vital Estates team.",
+            "Nice people for property dealing. Good experience working with the Real Estates team.",
         stars: 4,
     },
 ];

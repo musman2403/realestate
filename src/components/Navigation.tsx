@@ -47,7 +47,7 @@ export default function Navigation() {
     return (
         <nav className={`${styles.iconNav} ${isVisible ? styles.visible : ""}`}>
             <div className={styles.brand}>
-                <span className={styles.brandV}>V</span>
+                <span className={styles.brandV}>R</span>
                 <span className={styles.brandE}>E</span>
             </div>
             <div className={styles.divider} />

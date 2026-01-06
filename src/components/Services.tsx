@@ -79,7 +79,7 @@ export default function Services() {
                 >
                     <div className={styles.orbitCore}>
                         <div className={styles.coreInner}>
-                            Vital<br />Estate
+                            Real<br />Estate
                         </div>
                         <div className={styles.corePulse}></div>
                     </div>

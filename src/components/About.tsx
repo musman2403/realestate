@@ -61,7 +61,7 @@ export default function About() {
                         <span className="gradient-text">Real Estate Experts</span>
                     </h2>
                     <p className={styles.text}>
-                        Vital Estates & Builders has been helping buyers and investors
+                        Real Estates & Builders has been helping buyers and investors
                         navigate Lahore&apos;s property market with honesty and proven results.
                         We operate with full transparency — every deal backed by documented
                         verification, competitive pricing, and professional support.

@@ -1,3 +1,4 @@
+import { Barlow_Semi_Condensed } from "next/font/google";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -7,7 +8,7 @@ export default function Footer() {
                 <div className={styles.grid}>
                     {/* Brand Column */}
                     <div className={styles.brandCol}>
-                        <h3 className={styles.brand}>Vital Estates</h3>
+                        <h3 className={styles.brand}>Real Estates</h3>
                         <p className={styles.tagline}>DOCUMENTATION-FIRST REAL ESTATE</p>
                         <p className={styles.description}>
                             No unapproved files. No hidden risks. Every deal backed by verified documentation.
@@ -48,15 +49,15 @@ export default function Footer() {
                         <ul>
                             <li>
                                 <span className={styles.icon}>📞</span>
-                                <span>+92 300 464 5290</span>
+                                <span>+92 347 276 2472</span>
                             </li>
                             <li>
                                 <span className={styles.icon}>✉️</span>
-                                <span>{/* Email placeholder */}</span>
+                                <span>{"brisco.official@gmail.com"}</span>
                             </li>
                             <li>
                                 <span className={styles.icon}>📍</span>
-                                <span>1 C1 A, Block C1 Block C 1<br />Engineers Town, Lahore</span>
+                                <span>Jame Masjid Umer-e-Farooq B-block<br />Engineers Town, Lahore</span>
                             </li>
                         </ul>
                     </div>
@@ -73,7 +74,7 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.bottom}>
-                    <p>© {new Date().getFullYear()} Vital Estates & Builders. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Real Estates & Builders. All rights reserved.</p>
                 </div>
             </div>
         </footer>
